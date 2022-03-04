@@ -48,16 +48,3 @@ p
 
 ggplotly(p)
 
-#Запрос 3
-
-res <- dbSendQuery(con, "SELECT YEAR(Booking) as year, count(*) as num from ticker group by YEAR(Booking) order by YEAR(Booking)")
-
-stst <- dbFetch(res)
-
-dbClearResult(res)
-
-#График
-
-p <- plot_ly(stst, labels = ~stst$year, values = ~stst$num, type = 'pie', textposition = 'inside', textinfo = 'label+percent', insidetextfont = list(color = '#FFFFFF')) %>% layout(title = 'Количество купленных билетов по годам', xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
-
-p
